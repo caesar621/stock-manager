@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('batch');
+            $table->string('arr_date');
+            $table->string('fab_date');
+            $table->string('exp_date');
+            $table->string('qt_stock');
             $table->timestamps();
         });
     }

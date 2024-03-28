@@ -12,11 +12,11 @@ class Product extends Model
     protected $fillable = [
         'name',
         'batch',
-        'date',
-        'fabrication',
-        'expiration',
-        'quantity',
-        'output',
-        'returned',
+        'arr_date',
+        'fab_date',
+        'exp_date',
+        'qt_stock',
+        'qt_sold',
+        'qt_returned',
     ];
 }

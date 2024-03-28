@@ -36,15 +36,13 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'batch' => 'required|string',
-            'date' => 'required',
-            'fabrication' => 'required',
-            'expiration' => 'required',
-            'quantity',
-            'output',
-            'returned',
+            'arr_date' => 'required',
+            'fab_date' => 'required',
+            'exp_date' => 'required',
         ]);
 
         // $request->user()->chirps()->create($validated);
+        $request->user()->products()->create($validated);
 
         return redirect(route('products.index'));
     }
