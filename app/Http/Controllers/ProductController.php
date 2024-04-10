@@ -16,7 +16,8 @@ class ProductController extends Controller
     public function index(): View
     {
         return view('products.index', [
-            'products' => Product::with('name')->latest()->get(),
+            // 'products' => Product::class->latest()->get(),
+            'products' => Product::all(),
         ]);
     }
 
@@ -33,18 +34,28 @@ class ProductController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
+
+        $request->merge(['qt_stock' => "80"]);
+
         $validated = $request->validate([
-            'name' => 'required|string',
-            'batch' => 'required|string',
+            'name' => 'required',
+            'batch' => 'required|max:13',
+            'qt_stock' => 'required',
             'arr_date' => 'required',
             'fab_date' => 'required',
             'exp_date' => 'required',
         ]);
 
         // $request->user()->chirps()->create($validated);
-        $request->user()->products()->create($validated);
+        //$request->user()->products()->create($validated);
+        Product::create($validated);
 
         return redirect(route('products.index'));
+    }
+
+    public function newform()
+    {
+        return view('products.newform');
     }
 
     /**

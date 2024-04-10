@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('products', ProductController::class)
-    ->only(['index', 'create', 'store'])
+    ->only(['index', 'create', 'store', 'newform'])
     ->middleware(['auth', 'verified']);
 
 
