@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="flex justify-center max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <table>
             <thead>
                 <tr>
@@ -17,11 +17,11 @@
                 @foreach ($products as $product)
                     <tr>
                         <td class="px-6 py-4">{{ $product->name }}</td>
-                        <td>{{ $product->batch }}</td>
-                        <td>{{ $product->arr_date }}</td>
-                        <td>{{ $product->fab_date }}</td>
-                        <td>{{ $product->exp_date }}</td>
-                        <td>{{ $product->qt_stock }}</td>
+                        <td class="px-6 py-4">{{ $product->batch }}</td>
+                        <td class="px-6 py-4">{{ $product->arr_date }}</td>
+                        <td class="px-6 py-4">{{ $product->fab_date }}</td>
+                        <td class="px-6 py-4">{{ $product->exp_date }}</td>
+                        <td class="px-6 py-4">{{ $product->qt_stock }}</td>
                         <!-- <td>$product->output</td>
                         <td>$product->returned</td> -->
                     </tr>

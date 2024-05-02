@@ -16,7 +16,6 @@ class ProductController extends Controller
     public function index(): View
     {
         return view('products.index', [
-            // 'products' => Product::class->latest()->get(),
             'products' => Product::all(),
         ]);
     }
@@ -35,7 +34,7 @@ class ProductController extends Controller
     public function store(Request $request) : RedirectResponse
     {
 
-        $request->merge(['qt_stock' => "80"]);
+        // $request->merge(['qt_stock' => "80"]);
 
         $validated = $request->validate([
             'name' => 'required',
@@ -53,10 +52,40 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
-    public function newform()
+    public function menu()
     {
-        return view('products.newform');
+        return view('products.menu', [
+            'products' => Product::all(),
+        ]);
     }
+
+    public function viewer()
+    {
+
+        // $names = Product::distinct('name')->pluck('name');
+        // $products = collect();
+
+        // foreach ($names as $name) {
+        //     $product = Product::where('name', $name)
+        //         ->where('qt_stock', '>', 0)
+        //         ->orderBy('fab_date', 'asc')
+        //         ->first();
+
+        //     if ($product) {
+        //         $products->push($product);
+        //     }
+        // }
+
+        $products = Product::where('qt_stock', '>', 0)
+            ->orderBy('fab_date', 'asc')
+            ->groupBy('name')
+            ->get();
+
+        return view('products.viewer', [
+            'products' => $products,
+        ]);
+    }
+
 
     /**
      * Display the specified resource.
