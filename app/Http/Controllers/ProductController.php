@@ -13,12 +13,51 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
+        // return view('products.index', [
+        //     'products' => Product::all(),
+        // ]);
+
+        $arrStartDate = $request->input('arr_start_date');
+        $arrEndDate = $request->input('arr_end_date');
+
+        $fabStartDate = $request->input('fab_start_date');
+        $fabEndDate = $request->input('fab_end_date');
+
+        $expStartDate = $request->input('exp_start_date');
+        $expEndDate = $request->input('exp_end_date');
+
+        $query= Product::select('*');
+
+        if (!empty($request->name)) {
+            $query->where('name', '=', $request->name);
+        }
+
+        if (!empty($arrStartDate) && !empty($arrEndDate)) {
+            $query->whereBetween('arr_date', [$arrStartDate, $arrEndDate]);
+        }
+
+        if (!empty($fabStartDate) && !empty($fabEndDate)) {
+            $query->whereBetween('fab_date', [$fabStartDate, $fabEndDate]);
+        }
+
+        // $request->exp_start_date
+        if (!empty($expStartDate) && !empty($expEndDate)) {
+            $query->whereBetween('exp_date', [$expStartDate, $expEndDate]);
+        }
+
+        if (!empty($request->order)) {
+            $query->orderBy('arr_date', $request->order);
+        }
+        
+        $products = $query->get();
+        
         return view('products.index', [
-            'products' => Product::all(),
+            'products' => $products,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,7 +91,7 @@ class ProductController extends Controller
         return redirect(route('products.index'));
     }
 
-    public function menu()
+    public function search()
     {
         return view('products.menu', [
             'products' => Product::all(),
