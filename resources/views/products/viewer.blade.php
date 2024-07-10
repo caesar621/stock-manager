@@ -1,4 +1,5 @@
 <x-app-layout>
+    @livewire('wire-elements-modal')
 
         <div class="flex flex-wrap">
         @foreach ($products as $product)
@@ -10,9 +11,9 @@
         @endforeach
         </div>
 
-        <div class="flex items-end justify-end border border-red-600">
+        <div class="flex items-end justify-center border border-red-600">
             <div class="border border-red-600">
-                FORM
+                <button onclick="Livewire.dispatch('openModal', { component: 'request-item' } )">Pedir item</button>
             </div>
         </div>
         

@@ -15,9 +15,12 @@ class ProductController extends Controller
      */
     public function index(Request $request): View
     {
-        // return view('products.index', [
-        //     'products' => Product::all(),
-        // ]);
+        return view('products.index', [
+            'products' => Product::all(),
+        ]);
+    }
+
+    public function filter( Request $request ) {
 
         $arrStartDate = $request->input('arr_start_date');
         $arrEndDate = $request->input('arr_end_date');
@@ -120,9 +123,9 @@ class ProductController extends Controller
             ->groupBy('name')
             ->get();
 
-        return view('products.viewer', [
-            'products' => $products,
-        ]);
+            return view('products.viewer', [
+                'products' => $products,
+            ]);
     }
 
 

@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('products/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/filter', [ProductController::class, 'filter'])->name('products.filter');
     Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('products/store', [ProductController::class, 'store'])->name('products.store');
     Route::get('products/menu', [ProductController::class, 'menu'])->name('products.menu');

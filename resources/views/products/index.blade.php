@@ -1,41 +1,41 @@
 <x-app-layout>
     <div class="flex flex-col items-center max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 border border-red-800">
         <div class="border border-red-800 w-full">
-            <form action="{{ route('products.index') }}" method="GET" class="grid justify-items-center grid-cols-3">
+            <form action="{{ route('products.filter') }}" method="GET" class="grid justify-items-center grid-cols-3">
                 <div>
                     <legend>Nome do Item</legend>
-                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Nome do item">
+                    <input type="text" name="name" value="{{ Request::input('name') }}" placeholder="Nome do item">
                 </div>
                 
                 <div >
                     <legend>Data de chegada</legend>
                     <fieldset class="">
-                        <input type="month" name="arr_start_date" value="MM/YY">
-                        <input type="month" name="arr_end_date" value="MM/YY">
+                        <input type="month" name="arr_start_date" value="{{ Request::input('arr_start_date') }}">
+                        <input type="month" name="arr_end_date" value="{{ Request::input('arr_end_date') }}">
                     </fieldset>
                 </div>
 
                 <div>
                     <legend>Data de Fabricação</legend>
                     <fieldset>
-                        <input type="month" name="fab_start_date" placeholder="Data Inicial" value="fab_start_date">
-                        <input type="month" name="fab_end_date" placeholder="Data Final" value="fab_end_date">
+                        <input type="month" name="fab_start_date" placeholder="Data Inicial" value="{{ Request::input('arrfab_start_date') }}">
+                        <input type="month" name="fab_end_date" placeholder="Data Final" value="{{ Request::input('fab_end_date') }}">
                     </fieldset>  
                 </div>
 
                 <div>
                     <legend>Data de Validade</legend>
                     <fieldset>
-                        <input type="month" name="exp_start_date" placeholder="Data Inicial">
-                        <input type="month" name="exp_end_date" placeholder="Data Final">
+                        <input type="month" name="exp_start_date" placeholder="Data Inicial" value="{{ Request::input('exp_start_date') }}">
+                        <input type="month" name="exp_end_date" placeholder="Data Final" value="{{ Request::input('exp_end_date') }}">
                     </fieldset> 
                 </div>
 
                 <div>
                     <legend>Ordem</legend>
-                    <select name="order" class="w-1/3">
-                        <option value="asc">Crescente</option>
-                        <option value="desc">Decrescente</option>
+                    <select name="order" class="">
+                        <option value="asc" {{ Request::input('order') == 'asc' ? 'selected' : '' }}>Crescente</option>
+                        <option value="desc" {{ Request::input('order') == 'desc' ? 'selected' : '' }}>Decrescente</option>
                     </select>
                 </div>
 
@@ -44,8 +44,9 @@
                         <input class="" type="submit">
                     </button>
 
-                    <button class="border border-red-800 m-auto">
-                        Resetar
+                    
+                    <button type="button" class="border border-red-800 m-auto">
+                    <a href="{{ url()->current() }}">Resetar</a>
                     </button>
                 </div>
                 
